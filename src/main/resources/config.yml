@@ -1,0 +1,17 @@
+# SharkonomyII settings
+
+currency:
+  currency: "SC"
+  currency_name: "Sharcoins"
+  currency_item: "PRISMARINE_SHARD" # The item ID, all caps
+
+features:
+  enable_shop: true # Toggle the shop feature
+  enable_withdraw: true # Allows withdrawing currency into actual items
+
+misc:
+  daily_rewards: true # Make players receive daily money
+  daily_reward: 20 # Amount of money the player receives daily "without the adder"
+  daily_adder: 5 # adds 5 to the daily reward every day if the player is on daily join streak
+  start_money: 80 # Starting money for the player
+

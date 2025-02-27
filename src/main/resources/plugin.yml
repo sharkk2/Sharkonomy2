@@ -1,0 +1,6 @@
+name: Sharkonomy2
+version: '1.0'
+main: org.sharkonomy.Sharkonomy
+api-version: '1.21'
+authors: [ sharkk2 ]
+description: A remake of the Sharkonomy plugin
