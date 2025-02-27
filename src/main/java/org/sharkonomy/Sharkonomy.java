@@ -6,9 +6,11 @@ import org.sharkonomy.listeners.playerJoin;
 
 public final class Sharkonomy extends JavaPlugin {
     private db database;
+    private static Sharkonomy instance;
 
     @Override
     public void onEnable() {
+        instance = this;
         saveDefaultConfig();
         getLogger().info("Initializing...");
         database = new db(this);
@@ -21,7 +23,12 @@ public final class Sharkonomy extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    public static Sharkonomy getInstance() {
+        return instance;
+    }
+
     public db getDatabase() {
         return database;
     }
+
 }
