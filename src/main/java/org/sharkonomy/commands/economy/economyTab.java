@@ -14,7 +14,7 @@ public class economyTab implements TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (args.length == 1) {
-            return Arrays.asList("balance", "give");
+            return Arrays.asList("balance");
         }
         return null;
     }

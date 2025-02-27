@@ -27,7 +27,7 @@ public class economy implements CommandExecutor {
         if (subCommand != null) {
             subCommand.execute(sender, args);
         } else {
-            sender.sendMessage("§cUnknown subcommand. Use /economy <balance/give>");
+            sender.sendMessage("§cUnknown subcommand. Use /economy <subcommand>");
         }
         return true;
     }

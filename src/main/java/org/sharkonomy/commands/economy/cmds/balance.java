@@ -18,7 +18,7 @@ public class balance implements SubCommand {
         db database = Sharkonomy.getInstance().getDatabase();
         JsonObject playerData = database.getPlayer(player.getUniqueId());
         String currency = Sharkonomy.getInstance().getConfig().getString("currency.currency");
-        Integer balance = 0;
+        int balance = 0;
         if (playerData == null) {
             database.addPlayer(player.getUniqueId());
             player.sendMessage("Your current bank balance is §6§l" + balance + " " + currency);
