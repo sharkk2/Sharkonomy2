@@ -1,6 +1,8 @@
 package org.sharkonomy;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.sharkonomy.commands.economy.economy;
+import org.sharkonomy.commands.economy.economyTab;
 import org.sharkonomy.utils.db;
 import org.sharkonomy.listeners.playerJoin;
 
@@ -15,6 +17,8 @@ public final class Sharkonomy extends JavaPlugin {
         getLogger().info("Initializing...");
         database = new db(this);
         getServer().getPluginManager().registerEvents(new playerJoin(this), this);
+        getCommand("economy").setExecutor(new economy());
+        getCommand("economy").setTabCompleter(new economyTab());
         getLogger().info("Initialized! Sharkonomy ready");
     }
 

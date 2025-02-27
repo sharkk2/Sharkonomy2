@@ -1,5 +1,6 @@
 package org.sharkonomy.commands.economy;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,7 +20,7 @@ public class economy implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("§cUsage: /economy <subcommand>");
+            sender.sendMessage(ChatColor.RED + "Usage: /economy <subcommand>");
             return true;
         }
 
@@ -27,7 +28,7 @@ public class economy implements CommandExecutor {
         if (subCommand != null) {
             subCommand.execute(sender, args);
         } else {
-            sender.sendMessage("§cUnknown subcommand. Use /economy <subcommand>");
+            sender.sendMessage(ChatColor.RED + "Unknown subcommand. Use /economy <subcommand>");
         }
         return true;
     }
