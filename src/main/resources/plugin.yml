@@ -8,4 +8,4 @@ commands:
   economy:
     description: Economy system command
     usage: /economy <subcommand>
-    aliases: [eco]s
+    aliases: [eco]
