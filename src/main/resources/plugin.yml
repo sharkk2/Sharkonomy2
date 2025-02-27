@@ -4,3 +4,8 @@ main: org.sharkonomy.Sharkonomy
 api-version: '1.21'
 authors: [ sharkk2 ]
 description: A remake of the Sharkonomy plugin
+commands:
+  economy:
+    description: Economy system command
+    usage: /economy <subcommand>
+    aliases: [eco]s
