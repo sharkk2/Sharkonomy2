@@ -19,10 +19,13 @@ public class giveStarter {
 
         if (!database.playerExists(playerUUID)) {
             database.addPlayer(playerUUID);
+        } else {
+            return;
         }
 
         JsonObject playerdata = database.getPlayer(playerUUID);
         playerdata.addProperty("balance", starter);
+        database.savePlayer(playerUUID, playerdata);
 
         player.sendMessage(
                 "Welcome §asharkk2!§r\n" +
