@@ -56,6 +56,7 @@ public class db {
     }
 
     public void addPlayer(UUID playerUUID) {
+        loadDB();
         if (!database.containsKey(playerUUID)) {
             PlayerData newData = new PlayerData();
             database.put(playerUUID, newData);
@@ -64,10 +65,12 @@ public class db {
     }
 
     public boolean playerExists(UUID playerUUID) {
+        loadDB();
         return database.containsKey(playerUUID);
     }
 
     public JsonObject getPlayer(UUID playerUUID) {
+        loadDB();
         if (!playerExists(playerUUID)) {return null;}
         PlayerData playerData = database.get(playerUUID);
         if (playerData == null) {
@@ -78,6 +81,7 @@ public class db {
 
 
     public void savePlayer(UUID playerUUID, JsonObject playerJson) {
+        loadDB();
         PlayerData playerData = gson.fromJson(playerJson, PlayerData.class);
         database.put(playerUUID, playerData);
         saveDB();
