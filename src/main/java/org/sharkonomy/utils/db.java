@@ -2,18 +2,14 @@ package org.sharkonomy.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.sharkonomy.Sharkonomy;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import org.sharkonomy.Sharkonomy;
+import java.util.*;
 
 public class db {
 
@@ -69,33 +65,84 @@ public class db {
         return database.containsKey(playerUUID);
     }
 
-    public JsonObject getPlayer(UUID playerUUID) {
+    public PlayerData getPlayer(UUID playerUUID) {
         loadDB();
-        if (!playerExists(playerUUID)) {return null;}
-        PlayerData playerData = database.get(playerUUID);
-        if (playerData == null) {
-            return null;
-        }
-        return gson.toJsonTree(playerData).getAsJsonObject();
+        return database.getOrDefault(playerUUID, null);
     }
 
-
-    public void savePlayer(UUID playerUUID, JsonObject playerJson) {
+    public void savePlayer(UUID playerUUID, PlayerData playerData) {
         loadDB();
-        PlayerData playerData = gson.fromJson(playerJson, PlayerData.class);
         database.put(playerUUID, playerData);
         saveDB();
     }
 
     public static class PlayerData {
         public double balance = 0;
-        public Map<String, Object> shop = new HashMap<>();
         public DailyData daily = new DailyData();
-        public Map<String, Object> transactions = new HashMap<>();
+        public Map<UUID, Transaction> transactions = new HashMap<>();
+
+        public void setBalance(double amount) {
+            balance = amount;
+        }
+
+        public void addTransaction(Transaction transaction) {    // NOT TESTED FOR ERRORS!!!!!
+            long currentTime = System.currentTimeMillis();
+            for (Transaction nig : transactions.values()) { // nig: existing transaction
+                if (nig.type == transaction.type &&
+                        nig.description.equals(transaction.description) &&
+                        nig.amount == transaction.amount &&
+                        (currentTime - nig.date) < 60000 // 1 min
+                ) {
+
+                    nig.amount += transaction.amount;
+                    nig.date = currentTime;
+                    return;
+                }
+            }
+            transactions.put(transaction.id, transaction);
+        }
+
+        public void removeTransaction(UUID transactionId) {
+            transactions.remove(transactionId);
+        }
     }
 
     public static class DailyData {
         public long last_daily = 0;
         public double daily_increase = 0;
+
+        public void setDaily() {
+            setDaily(System.currentTimeMillis());
+        }
+
+        public void setDaily(Long epoch) {
+            last_daily = epoch;
+        }
+
+        public void increaseDaily(Byte inc) {
+            daily_increase += inc;
+        }
+
+        public void resetIncrease() {
+            daily_increase = 0;
+        }
+    }
+
+    public static class Transaction {
+        public UUID id;
+        public int type; // 0 out, 1 in
+        public UUID transactor;
+        public long date;
+        public String description;
+        public double amount;
+
+        public Transaction(int type, Player transactor, String description, double amount) {
+            this.id = UUID.randomUUID();
+            this.type = type;
+            this.transactor = transactor.getUniqueId();
+            this.date = System.currentTimeMillis();
+            this.description = description;
+            this.amount = amount;
+        }
     }
 }
