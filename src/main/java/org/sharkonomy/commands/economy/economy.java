@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.sharkonomy.commands.economy.cmds.balance;
 import org.jetbrains.annotations.NotNull;
+import org.sharkonomy.commands.economy.cmds.give;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,7 @@ public class economy implements CommandExecutor {
 
     public economy() {
         subCommands.put("balance", new balance());
+        subCommands.put("give", new give());
     }
 
     @Override
