@@ -23,8 +23,8 @@ public class giveStarter {
             return;
         }
 
-        JsonObject playerdata = database.getPlayer(playerUUID);
-        playerdata.addProperty("balance", starter);
+        db.PlayerData playerdata = database.getPlayer(playerUUID);
+        playerdata.setBalance(starter);
         database.savePlayer(playerUUID, playerdata);
 
         player.sendMessage(

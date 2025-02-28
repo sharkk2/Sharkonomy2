@@ -1,5 +1,4 @@
 package org.sharkonomy.commands.economy.cmds;
-import com.google.gson.JsonObject;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,16 +15,15 @@ public class balance implements SubCommand {
         }
 
         db database = Sharkonomy.getInstance().getDatabase();
-        JsonObject playerData = database.getPlayer(player.getUniqueId());
+        db.PlayerData playerData = database.getPlayer(player.getUniqueId());
         String currency = Sharkonomy.getInstance().getConfig().getString("currency.currency");
-        int balance = 0;
         if (playerData == null) {
             database.addPlayer(player.getUniqueId());
-            player.sendMessage("Your current bank balance is §6§l" + balance + " " + currency);
+            player.sendMessage("Your current bank balance is §6§l0 " + currency);
+            return;
         }
 
-        balance = playerData.get("balance").getAsInt();
-        player.sendMessage("Your current bank balance is §6§l" + balance + " " + currency);
+        player.sendMessage("Your current bank balance is §6§l" + playerData.balance + " " + currency);
 
     }
 }
