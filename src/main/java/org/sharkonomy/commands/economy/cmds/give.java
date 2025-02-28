@@ -51,10 +51,21 @@ public class give implements SubCommand {
             return;
         }
 
+        if (player.getUniqueId().equals(target.getUniqueId())) {
+            sender.sendMessage(ChatColor.RED + "You cannot send money to yourself!");
+            return;
+        }
 
 
         playerData.setBalance(playerData.balance -= amount);
         targetData.setBalance(targetData.balance += amount);
+
+        db.Transaction transaction1 = new db.Transaction(0, target, "TRANSFER Action", amount);
+        db.Transaction transaction2 = new db.Transaction(1, player, "TRANSFER Action", amount);
+
+        playerData.addTransaction(transaction1);
+        targetData.addTransaction(transaction2);
+
         database.savePlayer(player.getUniqueId(), playerData);
         database.savePlayer(target.getUniqueId(), targetData);
 
@@ -81,5 +92,6 @@ public class give implements SubCommand {
                 ChatColor.AQUA + target.getName() + "\n");
         senderMessage.addExtra(balanceText);
         player.spigot().sendMessage(senderMessage);
+
     }
 }
