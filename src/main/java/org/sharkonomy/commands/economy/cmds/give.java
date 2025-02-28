@@ -1,6 +1,7 @@
 package org.sharkonomy.commands.economy.cmds;
 
 
+import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.sharkonomy.Sharkonomy;
@@ -59,10 +60,10 @@ public class give implements SubCommand {
 
         TextComponent thanksText = new TextComponent("thanks");
         thanksText.setColor(ChatColor.LIGHT_PURPLE);
-        thanksText.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/say Thanks " + player.getName() + "!"));
+        thanksText.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "Thanks " + player.getName() + "!"));
 
         TextComponent balanceText = new TextComponent("Click here to see your balance");
-        balanceText.setColor(ChatColor.DARK_PURPLE);
+        balanceText.setColor(ChatColor.LIGHT_PURPLE);
         balanceText.setBold(true);
         balanceText.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/economy balance"));
 
@@ -73,8 +74,9 @@ public class give implements SubCommand {
         message.addExtra(balanceText);
 
         target.spigot().sendMessage(message);
+        target.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
 
-        TextComponent senderMessage = new TextComponent(ChatColor.GREEN + "You have sent " +
+        TextComponent senderMessage = new TextComponent("You have sent " +
                 ChatColor.GOLD + ChatColor.BOLD + amount + " " + currency + ChatColor.RESET + " to " +
                 ChatColor.AQUA + target.getName() + "\n");
         senderMessage.addExtra(balanceText);
