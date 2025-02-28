@@ -100,6 +100,7 @@ public class db {
                 }
             }
             transactions.put(transaction.id, transaction);
+            Bukkit.getLogger().info("Issued new transaction (" + transaction.amount + "$): " + transaction.description);
         }
 
         public void removeTransaction(UUID transactionId) {
