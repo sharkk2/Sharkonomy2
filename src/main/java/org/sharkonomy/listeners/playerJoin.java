@@ -6,6 +6,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 import org.sharkonomy.Sharkonomy;
+import org.sharkonomy.utils.PluginData;
 import org.sharkonomy.utils.giveStarter;
 
 public class playerJoin implements Listener {
@@ -19,6 +20,10 @@ public class playerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        giveStarter.give_starter(player.getUniqueId(), plugin);
+        if (!giveStarter.give_starter(player.getUniqueId(), plugin)) {
+            PluginData plugindb = new PluginData(plugin);
+            plugindb.giveDaily(player.getUniqueId());
+
+        }
     }
 }

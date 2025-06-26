@@ -1,18 +1,19 @@
 package org.sharkonomy.commands.economy.cmds;
 
-
-import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.sharkonomy.Sharkonomy;
+import org.bukkit.plugin.Plugin;
 import org.sharkonomy.commands.economy.SubCommand;
-import org.sharkonomy.utils.db;
+import org.bukkit.Sound;
+import org.sharkonomy.Sharkonomy;
+import org.sharkonomy.utils.PluginData;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.ChatColor;
 
 
-public class give implements SubCommand {
+
+public class pay implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof Player player)) {
@@ -21,11 +22,18 @@ public class give implements SubCommand {
         }
 
         if (args.length < 3) {
-            sender.sendMessage(ChatColor.RED + "Usage: /economy give <player> <amount>");
+            sender.sendMessage(ChatColor.RED + "Usage: /economy pay <player> <amount>");
             return;
         }
 
-        Double amount = Double.parseDouble(args[2]);
+        double amount = 0;
+        try {
+            amount = Double.parseDouble(args[2]);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(ChatColor.RED + "Invalid number!");
+            return;
+        }
+
 
         if (amount <= 1) {
             sender.sendMessage(ChatColor.RED + "Amount must be greater than or equal to 1!");
@@ -40,9 +48,9 @@ public class give implements SubCommand {
 
 
         Sharkonomy plugin = Sharkonomy.getInstance();
-        db database = plugin.getDatabase();
-        db.PlayerData playerData = database.getPlayer(player.getUniqueId());
-        db.PlayerData targetData = database.getPlayer(target.getUniqueId());
+        PluginData database = plugin.getDatabase();
+        PluginData.PlayerData playerData = database.getPlayer(player.getUniqueId());
+        PluginData.PlayerData targetData = database.getPlayer(target.getUniqueId());
         String currency = Sharkonomy.getInstance().getConfig().getString("currency.currency");
         String currency_n = Sharkonomy.getInstance().getConfig().getString("currency.currency_name");
 
@@ -60,8 +68,8 @@ public class give implements SubCommand {
         playerData.setBalance(playerData.balance -= amount);
         targetData.setBalance(targetData.balance += amount);
 
-        db.Transaction transaction1 = new db.Transaction(0, target, "TRANSFER Action", amount);
-        db.Transaction transaction2 = new db.Transaction(1, player, "TRANSFER Action", amount);
+        PluginData.Transaction transaction1 = new PluginData.Transaction(0, target, "TRANSFER Action", amount);
+        PluginData.Transaction transaction2 = new PluginData.Transaction(1, player, "TRANSFER Action", amount);
 
         playerData.addTransaction(transaction1);
         targetData.addTransaction(transaction2);
@@ -92,6 +100,5 @@ public class give implements SubCommand {
                 ChatColor.AQUA + target.getName() + "\n");
         senderMessage.addExtra(balanceText);
         player.spigot().sendMessage(senderMessage);
-
     }
 }

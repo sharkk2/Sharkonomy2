@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.sharkonomy.commands.economy.SubCommand;
 import org.sharkonomy.Sharkonomy;
-import org.sharkonomy.utils.db;
+import org.sharkonomy.utils.PluginData;
 
 public class balance implements SubCommand {
     @Override
@@ -14,8 +14,8 @@ public class balance implements SubCommand {
             return;
         }
 
-        db database = Sharkonomy.getInstance().getDatabase();
-        db.PlayerData playerData = database.getPlayer(player.getUniqueId());
+        PluginData database = Sharkonomy.getInstance().getDatabase();
+        PluginData.PlayerData playerData = database.getPlayer(player.getUniqueId());
         String currency = Sharkonomy.getInstance().getConfig().getString("currency.currency");
         if (playerData == null) {
             database.addPlayer(player.getUniqueId());

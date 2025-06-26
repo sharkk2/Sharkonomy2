@@ -6,7 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.sharkonomy.commands.economy.cmds.balance;
 import org.jetbrains.annotations.NotNull;
-import org.sharkonomy.commands.economy.cmds.give;
+import org.sharkonomy.commands.economy.cmds.pay;
+import org.sharkonomy.commands.economy.cmds.withdraw;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,8 @@ public class economy implements CommandExecutor {
 
     public economy() {
         subCommands.put("balance", new balance());
-        subCommands.put("give", new give());
+        subCommands.put("pay", new pay());
+        subCommands.put("withdraw", new withdraw());
     }
 
     @Override
@@ -25,6 +27,7 @@ public class economy implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "Usage: /economy <subcommand>");
             return true;
         }
+
 
         SubCommand subCommand = subCommands.get(args[0].toLowerCase());
         if (subCommand != null) {

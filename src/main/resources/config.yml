@@ -3,15 +3,20 @@
 currency:
   currency: "SC"
   currency_name: "Sharcoins"
-  currency_item: "PRISMARINE_SHARD" # The item ID, all caps
+  currency_item: "PRISMARINE_SHARD" # The item ID, all caps "avoid usable/throwable items like eggs for example"
+  currency_item_name: "Sharcoin" # The name of the currency item
+  invincible_item: true # makes currency item fire-resistant and unbreakable
 
 features:
   enable_shop: true # Toggle the shop feature
   enable_withdraw: true # Allows withdrawing currency into actual items
+  rightClickDeposit: true # When a player right-clicks while holding a currency item, it's deposited into their balance
+
 
 misc:
   daily_rewards: true # Make players receive daily money
   daily_reward: 20 # Amount of money the player receives daily "without the adder"
   daily_adder: 5 # adds 5 to the daily reward every day if the player is on daily join streak
   start_money: 80 # Starting money for the player
+
 
