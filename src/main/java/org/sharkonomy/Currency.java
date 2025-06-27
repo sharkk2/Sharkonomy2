@@ -62,26 +62,22 @@ public class Currency {
 
     public boolean takeCurrency(Player player, int amount) {
         if (amount <= 0) return false;
-
-        int remaining = amount;
+        int rem = amount;
 
         for (int i = 0; i < player.getInventory().getSize(); i++) {
             ItemStack item = player.getInventory().getItem(i);
             if (!isCurrency(item)) continue;
-
             int stackAmount = item.getAmount();
-            if (stackAmount <= remaining) {
+            if (stackAmount <= rem) {
                 player.getInventory().setItem(i, null);
-                remaining -= stackAmount;
+                rem -= stackAmount;
             } else {
-                item.setAmount(stackAmount - remaining);
-                remaining = 0;
+                item.setAmount(stackAmount - rem);
+                rem = 0;
             }
-
-            if (remaining == 0) break;
+            if (rem == 0) break;
         }
-
-        return remaining == 0;
+        return rem == 0;
     }
 
     public boolean isCurrency(ItemStack item) {
