@@ -28,7 +28,7 @@ public class giveStarter {
         database.savePlayer(playerUUID, playerdata);
 
         player.sendMessage(
-                "Welcome §asharkk2!§r\n" +
+                "Welcome §a" + player.getName() + "!§r\n" +
                         "You got §6§l" + starter + " " + currency + "§7§o(" + currencyName + ")§f as a starter\n" +
                         "Earn more by playing daily, trading with players and selling items.\n" +
                         "\n" +

@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.sharkonomy.commands.economy.cmds.balance;
 import org.jetbrains.annotations.NotNull;
+import org.sharkonomy.commands.economy.cmds.deposit;
 import org.sharkonomy.commands.economy.cmds.pay;
 import org.sharkonomy.commands.economy.cmds.withdraw;
 
@@ -19,6 +20,7 @@ public class economy implements CommandExecutor {
         subCommands.put("balance", new balance());
         subCommands.put("pay", new pay());
         subCommands.put("withdraw", new withdraw());
+        subCommands.put("deposit", new deposit());
     }
 
     @Override

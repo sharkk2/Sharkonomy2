@@ -22,8 +22,6 @@ public class balance implements SubCommand {
             player.sendMessage("Your current bank balance is §6§l0 " + currency);
             return;
         }
-
         player.sendMessage("Your current bank balance is §6§l" + playerData.balance + " " + currency);
-
     }
 }

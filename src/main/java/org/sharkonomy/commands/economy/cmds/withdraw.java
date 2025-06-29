@@ -23,6 +23,7 @@ public class withdraw implements SubCommand {
         boolean withdrawalEnabled = Sharkonomy.getInstance().getConfig().getBoolean("features.enable_withdraw");
         if (!withdrawalEnabled) {
             sender.sendMessage(ChatColor.RED + "Withdrawing is disabled by server admins");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
             return;
         }
 
@@ -36,11 +37,14 @@ public class withdraw implements SubCommand {
             amount = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
             sender.sendMessage(ChatColor.RED + "Invalid number!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
             return;
         }
 
         if (amount <= 1) {
             sender.sendMessage(ChatColor.RED + "Amount must be greater than or equal to 1!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
+            return;
         }
 
         PluginData database = Sharkonomy.getInstance().getDatabase();
@@ -73,7 +77,7 @@ public class withdraw implements SubCommand {
         playerData.setBalance(playerData.balance -= amount);
 
         database.savePlayer(player.getUniqueId(), playerData);
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
 
         boolean rightClickDeposit = plugin.getConfig().getBoolean("features.rightClickDeposit");
 

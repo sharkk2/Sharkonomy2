@@ -31,18 +31,21 @@ public class pay implements SubCommand {
             amount = Double.parseDouble(args[2]);
         } catch (NumberFormatException e) {
             sender.sendMessage(ChatColor.RED + "Invalid number!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
             return;
         }
 
 
         if (amount <= 1) {
             sender.sendMessage(ChatColor.RED + "Amount must be greater than or equal to 1!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
         }
 
 
         Player target = sender.getServer().getPlayerExact(args[1]);
         if (target == null) {
             sender.sendMessage(ChatColor.RED + "Player not found!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
             return;
         }
 
@@ -56,11 +59,13 @@ public class pay implements SubCommand {
 
         if (playerData.balance < amount) {
             sender.sendMessage(ChatColor.RED + "You do not have enough " + currency_n + " to send!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
             return;
         }
 
         if (player.getUniqueId().equals(target.getUniqueId())) {
             sender.sendMessage(ChatColor.RED + "You cannot send money to yourself!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1.0f, 1.0f);
             return;
         }
 

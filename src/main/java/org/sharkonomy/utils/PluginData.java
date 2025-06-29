@@ -108,11 +108,13 @@ public class PluginData {
                 player.sendMessage("§cYou have lost your daily streak!");
             }
 
+            int streak = (int) Math.round((dailydb.daily_increase + 5) / 5);
+            if (streakLost) {streak = 1;}
             String currency = plugin.getConfig().getString("currency.currency");
             player.sendMessage( // a lil bit of this and a lil bit of that ahh
                     "You've earned §6" + reward + " " + currency + "§r for joining daily!\n" +
                             "Keep the streak to earn more every day.\n" +
-                            "Your current streak: §b" + ((int) Math.round((dailydb.daily_increase + 5) / 5)) + " day(s)§r."
+                            "Your current streak: §b" + streak + " day(s)§r."
             );
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
             return true;
