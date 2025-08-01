@@ -1,5 +1,5 @@
 name: Sharkonomy2
-version: '1.0'
+version: '1.1'
 main: org.sharkonomy.Sharkonomy
 api-version: '1.21'
 authors: [ sharkk2 ]

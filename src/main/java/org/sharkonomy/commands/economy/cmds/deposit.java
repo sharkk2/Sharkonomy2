@@ -56,7 +56,7 @@ public class deposit implements SubCommand {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         player.sendMessage("You have successfully deposited §6§l" + amount + " " + currency + "§r.\n" +
                 "----------------------------------\n" +
-                "Check your balance with §7/economy balance");
+                "Check your balance with /economy balance");
 
     }
 }

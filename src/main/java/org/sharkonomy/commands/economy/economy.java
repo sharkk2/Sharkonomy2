@@ -4,11 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.sharkonomy.commands.economy.cmds.balance;
+import org.sharkonomy.commands.economy.cmds.*;
 import org.jetbrains.annotations.NotNull;
-import org.sharkonomy.commands.economy.cmds.deposit;
-import org.sharkonomy.commands.economy.cmds.pay;
-import org.sharkonomy.commands.economy.cmds.withdraw;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +18,7 @@ public class economy implements CommandExecutor {
         subCommands.put("pay", new pay());
         subCommands.put("withdraw", new withdraw());
         subCommands.put("deposit", new deposit());
+        subCommands.put("transactions", new transactions());
     }
 
     @Override

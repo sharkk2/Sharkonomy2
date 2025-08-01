@@ -22,6 +22,7 @@ public class economyTab implements TabCompleter {
             completions.add("pay");
             completions.add("withdraw");
             completions.add("deposit");
+            completions.add("transactions");
 
         } else if (args.length == 2 && args[0].equalsIgnoreCase("pay")) {
             for (Player player : Bukkit.getOnlinePlayers()) {
