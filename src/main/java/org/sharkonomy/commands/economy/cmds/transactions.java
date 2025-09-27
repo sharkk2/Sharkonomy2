@@ -34,7 +34,6 @@ public class transactions implements SubCommand {
         PluginData database = Sharkonomy.getInstance().getDatabase();
         PlayerData playerData = database.getPlayer(player.getUniqueId());
         Map<Integer, Transaction> transactions = playerData.transactions;
-
         if (transactions.isEmpty()) {
             player.sendMessage(ChatColor.GRAY + "No transactions found.");
             return;
@@ -53,7 +52,6 @@ public class transactions implements SubCommand {
         sorted.sort(Comparator.comparingLong(t -> -t.date));
         int start = (page - 1) * 5;
         int end = Math.min(start + 5, sorted.size());
-
         for (int i = start; i < end; i++) {
             Transaction t = sorted.get(i);
             String type = t.type == 0 ? ChatColor.RED + "-" : ChatColor.GREEN + "+";

@@ -58,7 +58,7 @@ public class withdraw implements SubCommand {
             return;
         }
 
-        String currencyItemName = "";
+        String currencyItemName;
         Material mat = Material.getMaterial(currency_item.toUpperCase());
         if (mat != null || mat.isItem()) {
 
