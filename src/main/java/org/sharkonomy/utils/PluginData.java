@@ -72,6 +72,10 @@ public class PluginData {
         return database.getOrDefault(playerUUID, null);
     }
 
+    public Map<UUID, PlayerData> getData() {
+        return new HashMap<>(database);
+    }
+
     public void savePlayer(UUID playerUUID, PlayerData playerData) {
         loadDB();
         database.put(playerUUID, playerData);
@@ -127,10 +131,12 @@ public class PluginData {
         public double balance = 0;
         public DailyData daily = new DailyData();
         public Map<Integer, Transaction> transactions = new HashMap<>();
+        public Map<Integer, ShopItem> shop = new HashMap<>();
 
         public void setBalance(double amount) {
             balance = amount;
         }
+        public double getBalance() {return balance;}
 
         public void addTransaction(Transaction transaction) {    // NOT TESTED FOR ERRORS!!!!!
             long currentTime = System.currentTimeMillis();
@@ -150,9 +156,18 @@ public class PluginData {
             Bukkit.getLogger().info("Issued new transaction (" + transaction.amount + "$): " + transaction.description);
         }
 
-        public void removeTransaction(UUID transactionId) {
-            transactions.remove(transactionId);
+        public void removeTransaction(int transactionId) {transactions.remove(transactionId);}
+
+        public void addShopItem(ShopItem shopitem) {
+            if (shop.size() >= 54) {return;}
+            shop.put((int) Math.floor(Math.random() * 100000), shopitem);
         }
+        public void removeShopItem(int id) {shop.remove(id);}
+        public void removeShopItem(ShopItem shopItem) {
+            shop.entrySet().removeIf(entry -> entry.getValue().equals(shopItem));
+        }
+
+
     }
 
     public static class DailyData {
@@ -166,6 +181,18 @@ public class PluginData {
         public void increaseDaily(int inc) {daily_increase += inc;}
         public void resetIncrease() {
             daily_increase = 0;
+        }
+    }
+
+    public static class ShopItem {
+        public int quantity;
+        public double price;
+        public String serial;
+
+        public ShopItem(int quantity, double price, String serial) {
+            this.serial = serial;
+            this.price = price;
+            this.quantity = quantity;
         }
     }
 

@@ -19,6 +19,8 @@ public class economy implements CommandExecutor {
         subCommands.put("withdraw", new withdraw());
         subCommands.put("deposit", new deposit());
         subCommands.put("transactions", new transactions());
+        subCommands.put("leaderboard", new leaderboard());
+        subCommands.put("sell", new sell());
     }
 
     @Override

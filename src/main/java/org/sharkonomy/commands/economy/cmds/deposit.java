@@ -11,10 +11,11 @@ import org.sharkonomy.utils.PluginData;
 public class deposit implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "Only players can use this command");
             return;
         }
+        Player player = (Player) sender;
 
         if (args.length < 2) {
             sender.sendMessage(ChatColor.RED + "Usage: /economy withdraw <amount>");

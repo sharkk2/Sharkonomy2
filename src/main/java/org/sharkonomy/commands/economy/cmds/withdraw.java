@@ -9,16 +9,18 @@ import org.sharkonomy.Currency;
 import org.sharkonomy.commands.economy.SubCommand;
 import org.sharkonomy.Sharkonomy;
 import org.sharkonomy.utils.PluginData;
-import org.sharkonomy.utils.helpers;
+import org.sharkonomy.utils.Helpers;
 
 
 public class withdraw implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "Only players can use this command");
             return;
         }
+
+        Player player = (Player) sender;
 
         boolean withdrawalEnabled = Sharkonomy.getInstance().getConfig().getBoolean("features.enable_withdraw");
         if (!withdrawalEnabled) {
@@ -62,7 +64,7 @@ public class withdraw implements SubCommand {
         Material mat = Material.getMaterial(currency_item.toUpperCase());
         if (mat != null || mat.isItem()) {
 
-            currencyItemName = helpers.formatMatName(mat);
+            currencyItemName = Helpers.formatMatName(mat);
         } else {
             Bukkit.getLogger().warning("Currency item: " + currency_item + " is invalid!");
             sender.sendMessage(ChatColor.RED + "Currency item: " + currency_item + " is invalid! please check the 'config.yml' file of the plugin");

@@ -16,10 +16,11 @@ import net.md_5.bungee.api.ChatColor;
 public class pay implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "Only players can use this command");
             return;
         }
+        Player player = (Player) sender;
 
         if (args.length < 3) {
             sender.sendMessage(ChatColor.RED + "Usage: /economy pay <player> <amount>");

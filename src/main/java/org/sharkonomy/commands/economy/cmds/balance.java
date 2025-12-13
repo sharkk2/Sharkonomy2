@@ -10,7 +10,6 @@ import org.sharkonomy.utils.PluginData;
 // good luck debugging this <:
 // im sure u can
 
-// im not sure if this is going to work but it should
 public       class       balance implements       SubCommand
 {
 
@@ -22,17 +21,11 @@ public       class       balance implements       SubCommand
     )
 {
 
-        if         (       !
-                (sender
-                        instanceof  Player
-                player)        )       {
-            sender.sendMessage(
-                    ChatColor.
-                            RED       +
-                            "Only players can use this command"
-            );
-            return
-                    ; }
+        if (!(sender instanceof Player)) {
+           sender.sendMessage(ChatColor.RED + "Only players can use this command");
+           return;
+        }
+        Player player = (Player) sender;
 
         PluginData
                 database   =                                          Sharkonomy.getInstance( ).getDatabase( );
